@@ -25,7 +25,7 @@ def generate(name='a.out'):
                 'clean:\n' + \
                         '\t@echo Remove:\n' + \
                         '\t@ls | grep -E ".*\.(o|err)"\n' + \
-                        '\t@rm -f *.err *.o\n'
+                        '\t@rm -f *.err *.o ' + name + '\n'
 
     with open('Makefile', 'w') as makefile:
         makefile.write(script)
