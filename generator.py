@@ -23,9 +23,7 @@ def generate(name='a.out'):
                         '\t${CC} ${CFLAGS} $< 2> $*.err\n' + \
                         '\t@cat $*.err\n\n' + \
                 'clean:\n' + \
-                        '\t@echo Remove:\n' + \
-                        '\t@ls | grep -E ".*\.(o|err)"\n' + \
-                        '\t@rm -f *.err *.o ' + name + '\n'
+                        '\trm -f *.err *.o ' + name + '\n'
 
     with open('Makefile', 'w') as makefile:
         makefile.write(script)
