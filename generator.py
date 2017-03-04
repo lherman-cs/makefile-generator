@@ -10,25 +10,29 @@ def generate(name='a.out'):
     sources = [splitext(source)[0] + '.o' for source in os.listdir() \
                 if source.endswith('.c') or source.endswith('.cpp')]
 
-    script =    'CC = g++\n' + \
-                'CFLAGS = -Wall -c\n' + \
-                'OBJS = ' + ' '.join(sources) + '\n\n' + \
-                name + ': ${OBJS}\n' + \
-                        '\t@echo\n' + \
-                        '\t@echo Linking $@\n' + \
-                        '\t${CC} -o $@ ${OBJS}\n\n' + \
-                '%.o: %.cpp\n' + \
-                        '\t@echo\n' + \
-                        '\t@echo Compiling $<\n' + \
-                        '\t${CC} ${CFLAGS} $< 2> $*.err\n' + \
-                        '\t@cat $*.err\n\n' + \
-                'clean:\n' + \
-                        '\trm -f *.err *.o ' + name + '\n'
+    if sources:
+        script =    'CC = g++\n' + \
+                    'CFLAGS = -Wall -c\n' + \
+                    'OBJS = ' + ' '.join(sources) + '\n\n' + \
+                    name + ': ${OBJS}\n' + \
+                            '\t@echo\n' + \
+                            '\t@echo Linking $@\n' + \
+                            '\t${CC} -o $@ ${OBJS}\n\n' + \
+                    '%.o: %.cpp\n' + \
+                            '\t@echo\n' + \
+                            '\t@echo Compiling $<\n' + \
+                            '\t${CC} ${CFLAGS} $< 2> $*.err\n' + \
+                            '\t@cat $*.err\n\n' + \
+                    'clean:\n' + \
+                            '\trm -f *.err *.o ' + name + '\n'
 
-    with open('Makefile', 'w') as makefile:
-        makefile.write(script)
+        with open('Makefile', 'w') as makefile:
+            makefile.write(script)
 
-    print("Makefile has been successfully created!")
+        print("Makefile has been successfully created!")
+
+    else:
+        print("There is no c or c++ source code")
 
 def main():
     parser = ArgumentParser()
