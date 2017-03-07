@@ -1,13 +1,20 @@
 #!/bin/bash
 
-# Make a bin dir in home directory
-echo "Making a directory at $HOME/bin"
-mkdir $HOME/bin
+INST_PATH="$HOME/makefile-generator"
+
+# Make a dir for the program
+echo "Making a new directory at $INST_PATH"
+mkdir $INST_PATH
+cd $INST_PATH
 
 # Download the source codes
 echo "Downloading the source code"
 wget https://raw.githubusercontent.com/lukashh6/makefile-generator/master/generator.py
 chmod +x generator.py
+
+# Make a bin dir in home directory
+echo "Making a directory at $HOME/bin"
+mkdir $HOME/bin
 
 # Linking to the bin dir
 echo "Linking to $HOME/bin/generate"
